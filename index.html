@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="bn"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>South Asian Mirror</title>
+<link rel="icon" href="logo.webp">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;500;700&family=Noto+Serif+Bengali:wght@600;800&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#0a1f44;--blue:#0b4aa8;--sky:#2f8cf0;--bg:#eef3fa;--card:#fff;--mut:#5d6b82;--ln:#d9e2ef}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:400 17px/1.75 'Noto Sans Bengali',sans-serif}
+a{color:inherit;text-decoration:none}img{max-width:100%}.w{max-width:1120px;margin:auto;padding:0 16px}
+.bar{background:var(--ink);color:#c9d6ec;font-size:14px}.bar .w{display:flex;justify-content:space-between;align-items:center;min-height:40px;gap:10px}
+.bar button{background:#fff;color:var(--ink);border:0;border-radius:20px;padding:3px 14px;font:500 14px 'Noto Sans Bengali';cursor:pointer}
+.bar img{width:24px;height:24px;border-radius:50%;vertical-align:middle;margin-right:6px}
+.mast{background:#fff;padding:12px 0}.mast img{height:68px;display:block}
+nav{background:var(--blue);position:sticky;top:0;z-index:5}nav .w{display:flex;overflow-x:auto}
+nav a{color:#fff;padding:11px 15px;white-space:nowrap;font-weight:500}nav a:hover,nav a.on{background:var(--ink)}
+main{padding:22px 16px 10px}
+.hero{display:grid;grid-template-columns:1.7fr 1fr;gap:16px}
+.lead{position:relative;min-height:420px;border-radius:8px;overflow:hidden;background:linear-gradient(135deg,var(--blue),var(--sky));display:flex;align-items:flex-end;color:#fff}
+.lead img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.lead:after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(5,20,50,.92),rgba(5,20,50,.1) 70%)}
+.lead div{position:relative;z-index:1;padding:26px}.lead h1{font:800 clamp(26px,4.2vw,44px)/1.35 'Noto Serif Bengali',serif;margin:8px 0}.lead p{margin:0;opacity:.9}
+.chip{display:inline-block;background:var(--sky);color:#fff;font-size:13px;padding:0 10px;border-radius:4px}
+.side{display:flex;flex-direction:column;gap:12px}.side a{background:var(--card);border:1px solid var(--ln);border-radius:8px;padding:14px;flex:1}
+.side h3,.cd h3{font:600 19px/1.5 'Noto Serif Bengali',serif;margin:6px 0 2px}
+h2.sec{font:800 24px 'Noto Serif Bengali',serif;margin:34px 0 14px;display:flex;align-items:center;gap:12px}h2.sec:after{content:"";flex:1;height:2px;background:var(--ln)}
+.g{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:16px}
+.cd{background:var(--card);border:1px solid var(--ln);border-radius:8px;overflow:hidden;display:block}.cd:hover h3{color:var(--blue)}
+.cd .im{height:170px;background:linear-gradient(135deg,var(--blue),var(--sky))}.cd img{width:100%;height:170px;object-fit:cover;display:block}.cd .tx{padding:12px 14px 14px}
+small,.mt{color:var(--mut);font-size:14px}.cd p{margin:2px 0 6px;color:var(--mut);font-size:15px;line-height:1.6}
+.art{max-width:780px;margin:auto;background:var(--card);border:1px solid var(--ln);border-radius:8px;padding:clamp(18px,4vw,36px)}
+.art h1{font:800 clamp(26px,4vw,38px)/1.4 'Noto Serif Bengali',serif;margin:10px 0}.art .hi{width:100%;border-radius:6px;margin:14px 0}.art p{font-size:19px;line-height:1.95}
+.fm{max-width:720px;margin:auto;background:var(--card);border:1px solid var(--ln);border-radius:8px;padding:22px}
+input,textarea,select{width:100%;padding:10px 12px;margin:5px 0 14px;border:1px solid var(--ln);border-radius:6px;font:inherit;background:#fff}
+.btn{background:var(--blue);color:#fff;border:0;padding:8px 18px;border-radius:6px;font:500 16px 'Noto Sans Bengali';cursor:pointer;display:inline-block;margin:2px}.btn.g2{background:#5d6b82}.btn.rd{background:#b3261e}
+table{width:100%;border-collapse:collapse;background:#fff}td,th{padding:9px;border-bottom:1px solid var(--ln);text-align:left;vertical-align:top}.tabs{margin-bottom:14px}
+.pv{max-width:260px;border-radius:6px;display:block;margin:6px 0}[hidden]{display:none!important}
+footer{background:var(--ink);color:#aebbd3;text-align:center;padding:22px;margin-top:34px;font-size:14px}footer img{height:44px;background:#fff;border-radius:6px;padding:3px 8px}
+.note{background:#fff7e0;border:1px solid #f0d98c;padding:10px 14px;border-radius:6px;font-size:15px;margin-bottom:14px}
+@media(max-width:780px){.hero{grid-template-columns:1fr}.lead{min-height:320px}.mast img{height:52px}}
+@media(prefers-reduced-motion:no-preference){.lead{animation:rise .6s ease-out}@keyframes rise{from{opacity:0;transform:translateY(10px)}}}
+</style></head><body><div id="app"></div>
+<script type="module">
+import {initializeApp} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import {getAuth,GoogleAuthProvider,signInWithPopup,signOut,onAuthStateChanged} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+import {getFirestore,collection,getDocs,getDoc,doc,addDoc,setDoc,updateDoc,deleteDoc,query,orderBy,limit,writeBatch,where} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+/* ===== এখানে আপনার Firebase কনফিগ বসান ===== */
+const CFG={apiKey:"YOUR_API_KEY",authDomain:"YOUR_PROJECT.firebaseapp.com",projectId:"YOUR_PROJECT",appId:"YOUR_APP_ID"};
+/* ========================================== */
+
+const LIVE=!CFG.apiKey.startsWith("YOUR");
+let auth,db;if(LIVE){const fb=initializeApp(CFG);auth=getAuth(fb);db=getFirestore(fb);}
+const CATS=[['bangladesh','বাংলাদেশ'],['politics','রাজনীতি'],['economy','অর্থনীতি'],['sports','খেলা'],['entertainment','বিনোদন'],['technology','প্রযুক্তি'],['world','আন্তর্জাতিক']];
+const MON=['জানুয়ারি','ফেব্রুয়ারি','মার্চ','এপ্রিল','মে','জুন','জুলাই','আগস্ট','সেপ্টেম্বর','অক্টোবর','নভেম্বর','ডিসেম্বর'];
+const DEMO=[1,2,3,4].map((i,x)=>({id:'d'+i,title:['South Asian Mirror-এ স্বাগতম','নমুনা খেলার খবর','নমুনা প্রযুক্তির খবর','নমুনা অর্থনীতির খবর'][x],summary:'Firebase কনফিগ বসালে এখানে আপনার আসল খবর আসবে।',body:'এটি একটি নমুনা সংবাদ।',cat:['bangladesh','sports','technology','economy'][x],img:'',lead:x==0,ts:Date.now()-x*3600e3,by:'ডেমো'}));
+const S={news:[],user:null,admin:false,admins:[],tab:'news'};
+const $=id=>document.getElementById(id);
+const bn=s=>String(s).replace(/\d/g,x=>'০১২৩৪৫৬৭৮৯'[x]);
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const cn=k=>(CATS.find(c=>c[0]===k)||['',''])[1];
+const fd=t=>{const d=new Date(t);return bn(d.getDate()+' '+MON[d.getMonth()]+' '+d.getFullYear())};
+const su=u=>/^(https:\/\/|data:image\/)/i.test(u||'')?u.replace(/"/g,'&quot;'):'';
+
+async function load(){if(LIVE){const s=await getDocs(query(collection(db,'news'),orderBy('ts','desc'),limit(80)));S.news=s.docs.map(d=>({id:d.id,...d.data()}));}else S.news=DEMO;render();}
+if(LIVE)onAuthStateChanged(auth,async u=>{S.user=u;S.admin=false;if(u){try{S.admin=(await getDoc(doc(db,'admins',u.email.toLowerCase()))).exists();}catch(e){}}render();});
+
+window.login=()=>signInWithPopup(auth,new GoogleAuthProvider()).catch(e=>alert('লগইন হয়নি: '+e.code));
+window.logout=()=>signOut(auth).then(()=>location.hash='');
+
+const card=a=>`<a class="cd" href="#news-${a.id}">${su(a.img)?`<img src="${su(a.img)}" alt="" loading="lazy">`:'<div class="im"></div>'}<div class="tx"><span class="chip">${esc(cn(a.cat))}</span><h3>${esc(a.title)}</h3><p>${esc(a.summary)}</p><small>${fd(a.ts)}</small></div></a>`;
+function homeV(){const n=S.news;if(!n.length)return '<p>এখনও কোনো সংবাদ নেই।</p>';const L=n.find(x=>x.lead)||n[0],R=n.filter(x=>x.id!==L.id);
+let h=`<div class="hero"><a class="lead" href="#news-${L.id}">${su(L.img)?`<img src="${su(L.img)}" alt="">`:''}<div><span class="chip">${esc(cn(L.cat))}</span><h1>${esc(L.title)}</h1><p>${esc(L.summary)}</p></div></a><div class="side">${R.slice(0,3).map(a=>`<a href="#news-${a.id}"><span class="chip">${esc(cn(a.cat))}</span><h3>${esc(a.title)}</h3><small>${fd(a.ts)}</small></a>`).join('')}</div></div>`;
+CATS.forEach(c=>{const it=n.filter(x=>x.cat===c[0]&&x.id!==L.id).slice(0,4);if(it.length)h+=`<h2 class="sec"><a href="#cat-${c[0]}">${c[1]}</a></h2><div class="g">${it.map(card).join('')}</div>`;});return h;}
+const catV=k=>`<h2 class="sec">${esc(cn(k))}</h2><div class="g">${S.news.filter(x=>x.cat===k).map(card).join('')||'<p>এই বিভাগে এখনও কোনো সংবাদ নেই।</p>'}</div>`;
+function newsV(id){const a=S.news.find(x=>x.id===id);if(!a)return '<p>সংবাদটি পাওয়া যায়নি।</p>';const rel=S.news.filter(x=>x.cat===a.cat&&x.id!==id).slice(0,3);
+return `<article class="art"><span class="chip">${esc(cn(a.cat))}</span><h1>${esc(a.title)}</h1><small>${fd(a.ts)}${a.by?' | প্রতিবেদক: '+esc(a.by):''}</small>${su(a.img)?`<img class="hi" src="${su(a.img)}" alt="">`:''}${String(a.body).split('\n').filter(p=>p.trim()).map(p=>`<p>${esc(p)}</p>`).join('')}</article>${rel.length?`<h2 class="sec">আরও পড়ুন</h2><div class="g">${rel.map(card).join('')}</div>`:''}`;}
+
+function adminV(){if(!LIVE)return '<div class="note">Firebase কনফিগ বসানোর পর অ্যাডমিন চালু হবে।</div>';
+if(!S.user)return '<div class="fm"><h2>এডিটর লগইন</h2><p>আপনার Gmail দিয়ে লগইন করুন।</p><button class="btn" onclick="login()">Google দিয়ে লগইন</button></div>';
+if(!S.admin)return `<div class="fm"><h2>অনুমতি নেই</h2><p>${esc(S.user.email)} এখনও এডিটর তালিকায় নেই। সাইটের মালিককে এই ইমেইল যোগ করতে বলুন।</p></div>`;
+const t=S.tab==='news';
+let h=`<div class="tabs"><button class="btn ${t?'':'g2'}" onclick="tab('news')">সংবাদ</button><button class="btn ${t?'g2':''}" onclick="tab('ed')">এডিটর</button></div>`;
+if(t)return h+`<p><a class="btn" href="#new">+ নতুন সংবাদ</a></p><div style="overflow-x:auto"><table><tr><th>শিরোনাম</th><th>বিভাগ</th><th>প্রতিবেদক</th><th></th></tr>${S.news.map(a=>`<tr><td>${a.lead?'⭐ ':''}${esc(a.title)}</td><td>${esc(cn(a.cat))}</td><td>${esc(a.by||'')}</td><td style="white-space:nowrap"><a class="btn g2" href="#edit-${a.id}">এডিট</a><button class="btn rd" onclick="delNews('${a.id}')">মুছুন</button></td></tr>`).join('')}</table></div>`;
+return h+`<div class="fm"><h3>নতুন এডিটর যোগ করুন</h3><input id="ae" type="email" placeholder="example@gmail.com"><button class="btn" onclick="addAdmin()">যোগ করুন</button><h3>বর্তমান এডিটর</h3>${S.admins.map(e=>`<p>${esc(e)} ${e===S.user.email.toLowerCase()?'(আপনি)':`<button class="btn rd" onclick="delAdmin('${esc(e)}')">সরান</button>`}</p>`).join('')}</div>`;}
+window.tab=async k=>{S.tab=k;if(k==='ed')S.admins=(await getDocs(collection(db,'admins'))).docs.map(d=>d.id);render();};
+window.addAdmin=async()=>{const e=$('ae').value.trim().toLowerCase();if(!/^\S+@\S+\.\S+$/.test(e))return alert('সঠিক ইমেইল দিন');await setDoc(doc(db,'admins',e),{by:S.user.email});tab('ed');};
+window.delAdmin=async e=>{if(confirm(e+' কে সরাবেন?')){await deleteDoc(doc(db,'admins',e));tab('ed');}};
+
+function formV(id){if(!S.admin)return adminV();return `<div class="fm"><h2>${id?'সংবাদ সম্পাদনা':'নতুন সংবাদ'}</h2><label>শিরোনাম</label><input id="f_t"><label>সারসংক্ষেপ</label><textarea id="f_s" rows="2"></textarea><label>বিস্তারিত (প্রতি লাইনে একটি অনুচ্ছেদ)</label><textarea id="f_b" rows="10"></textarea><label>বিভাগ</label><select id="f_c">${CATS.map(c=>`<option value="${c[0]}">${c[1]}</option>`).join('')}</select><label>ছবি আপলোড করুন</label><input type="file" accept="image/*" onchange="pick(this)"><img id="pv" class="pv" hidden alt=""><label>অথবা ছবির লিংক (https://...)</label><input id="f_i"><label><input type="checkbox" id="f_l" style="width:auto"> লিড নিউজ</label><br><br><button class="btn" id="sv" onclick="saveNews('${id||''}')">সংরক্ষণ</button><a class="btn g2" href="#admin">বাতিল</a></div>`;}
+function fill(id){const a=S.news.find(x=>x.id===id);if(!a)return;f_t.value=a.title;f_s.value=a.summary||'';f_b.value=a.body;f_c.value=a.cat;f_l.checked=!!a.lead;if(su(a.img)){pv.src=a.img;pv.hidden=false;if(!a.img.startsWith('data:'))f_i.value=a.img;}}
+let IMG='';
+window.pick=inp=>{const f=inp.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{const im=new Image();im.onload=()=>{const k=Math.min(1,1000/Math.max(im.width,im.height)),c=document.createElement('canvas');c.width=im.width*k;c.height=im.height*k;c.getContext('2d').drawImage(im,0,0,c.width,c.height);let q=.78,d=c.toDataURL('image/jpeg',q);while(d.length>700000&&q>.3){q-=.1;d=c.toDataURL('image/jpeg',q);}IMG=d;pv.src=d;pv.hidden=false;};im.src=r.result;};r.readAsDataURL(f);};
+window.saveNews=async id=>{const t=f_t.value.trim(),b=f_b.value.trim();if(!t||!b)return alert('শিরোনাম ও বিস্তারিত লিখুন');$('sv').disabled=true;
+const old=S.news.find(x=>x.id===id),img=IMG||f_i.value.trim()||(old&&old.img)||'';
+const v={title:t,summary:f_s.value.trim(),body:b,cat:f_c.value,img:img,lead:f_l.checked};
+try{if(v.lead){const bt=writeBatch(db);S.news.filter(x=>x.lead&&x.id!==id).forEach(x=>bt.update(doc(db,'news',x.id),{lead:false}));await bt.commit();}
+if(id)await updateDoc(doc(db,'news',id),v);else await addDoc(collection(db,'news'),{...v,ts:Date.now(),by:S.user.displayName||S.user.email});
+IMG='';await load();location.hash='admin';}catch(e){alert('সংরক্ষণ হয়নি: '+e.code);$('sv').disabled=false;}};
+window.delNews=async id=>{if(!confirm('মুছে ফেলবেন?'))return;await deleteDoc(doc(db,'news',id));await load();};
+
+function render(){const [k,...r]=location.hash.slice(1).split('-'),a=r.join('-');
+const b=k==='cat'?catV(a):k==='news'?newsV(a):k==='admin'?adminV():k==='new'?formV():k==='edit'?formV(a):homeV();
+const d=new Date(),u=S.user;
+$('app').innerHTML=`<div class="bar"><div class="w"><span>${bn(d.getDate()+' '+MON[d.getMonth()]+' '+d.getFullYear())}</span>${!LIVE?'<span>ডেমো মোড</span>':u?`<span>${u.photoURL?`<img src="${esc(u.photoURL)}" alt="">`:''}${esc(u.displayName||u.email)} <button onclick="logout()">লগআউট</button></span>`:'<button onclick="login()">Google দিয়ে লগইন</button>'}</div></div>
+<div class="mast"><div class="w"><a href="#"><img src="logo.webp" alt="South Asian Mirror"></a></div></div>
+<nav><div class="w"><a href="#" class="${!k?'on':''}">প্রথম পাতা</a>${CATS.map(c=>`<a href="#cat-${c[0]}" class="${a===c[0]&&k==='cat'?'on':''}">${c[1]}</a>`).join('')}${S.admin?'<a href="#admin">অ্যাডমিন</a>':''}</div></nav>
+<main class="w">${LIVE?'':'<div class="note">ডেমো মোড: কোডের উপরের অংশে Firebase কনফিগ বসান।</div>'}${b}</main><footer><img src="logo.webp" alt=""><p>© South Asian Mirror</p></footer>`;
+if(k==='edit')fill(a);}
+window.addEventListener('hashchange',()=>{IMG='';render();scrollTo(0,0);});
+load();
+</script></body></html>
